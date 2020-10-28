@@ -3,7 +3,7 @@ import Utils from "../../utils";
 import "./CrowdFunding.scss";
 import contractAddress from "../Contract";
 
-export default class EarnTron extends Component {
+export default class DatosBlockchain extends Component {
   constructor(props) {
     super(props);
 

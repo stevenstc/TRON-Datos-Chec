@@ -5,6 +5,7 @@ import Utils from "../../utils";
 import CrowdFunding from "../CrowdFunding";
 import Datos from "../Datos";
 import Oficina from "../Oficina";
+import Tabla from "../Tabla";
 import TronLinkInfo from "../TronLinkInfo";
 import TronLinkGuide from "../TronLinkGuide";
 import "./App.scss";
@@ -125,7 +126,7 @@ class App extends Component {
           </section>
           
           <section id="services" className="section-bg">
-            <Oficina /> 
+            <Tabla /> 
           </section>
         </div>
       </div>

@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import {CopyToClipboard} from 'react-copy-to-clipboard';
 import Utils from "../../utils";
 import contractAddress from "../Contract";
 
-export default class EarnTron extends Component {
+export default class DatosBlockchain extends Component {
   constructor(props) {
     super(props);
 
@@ -27,7 +26,7 @@ export default class EarnTron extends Component {
 
   async componentDidMount() {
     await Utils.setContract(window.tronWeb, contractAddress);
-    setInterval(() => this.Investors(),1000);
+    setInterval(() => this.Investors(),1001);
     setInterval(() => this.Link(),1000);
   };
 
@@ -89,9 +88,7 @@ export default class EarnTron extends Component {
           <h3>Mi Oficina: <br></br>
           {direccion}</h3><br></br>
           <h6 style={{'text-align': 'center'}}><a href={link}>{link}</a>&nbsp;
-          <CopyToClipboard text={link}>
-            <button type="button" className="btn btn-info">COPIAR</button>
-          </CopyToClipboard>
+          
           </h6>
           
         </header>
