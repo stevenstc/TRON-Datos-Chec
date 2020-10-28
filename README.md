@@ -1,8 +1,8 @@
-## TRON Datos-en-Blockchain
+## TRON DES-COMMERCE
 
-[Online Demo](https://stevenstc.github.io/Datos-en-Blockchain/)
+[Online Demo](https://stevenstc.github.io/comercio/)
 
-Es una Dapp construida en TRON. es un ejemplo de como se podria tener Datos en Blockchain por internet sin necesidad de tener una base de datos
+Es una Dapp construida en TRON. es un ejemplo de como se podria comprar y vender articulos por internet sin necesidad de tener una tienda online
 Maneja repositorios de [TronWeb](https://github.com/tronprotocol/tron-web)
 y está integrada con [TronLink](https://github.com/TronWatch/TronLink).
 
