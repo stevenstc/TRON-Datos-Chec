@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Bar } from '@reactchartjs/react-chart.js'
+import { Bar } from 'react-chartjs-2'
 import Utils from "../../utils";
 import contractAddress from "../Contract";
 
@@ -12,6 +12,15 @@ export default class DatosBlockchain extends Component {
       totalInvested: 0,
       totalRefRewards: 0,
       options: {
+        title:{
+          display: true,
+          text:'Mis consumos KW/h',
+          fontSize: 25
+        },
+        legend:{
+          display: false,
+          position: 'rigth'
+        },
         scales: {
           yAxes: [
             {
@@ -22,51 +31,48 @@ export default class DatosBlockchain extends Component {
           ],
         },
       },
-      data:{
-  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-  datasets: [
-    {
-      label: 'Scale',
-      data: [1, 2, 3, 4, 5, 6],
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
-      ],
-      borderWidth: 1,
-    },
-  ],
-}
+      data:{}
     };
 
-    this.totalInvestors = this.totalInvestors.bind(this);
+    this.cambiarDatos = this.cambiarDatos.bind(this);
   }
 
-  async componentDidMount() {
-    await Utils.setContract(window.tronWeb, contractAddress);
-    setInterval(() => this.totalInvestors(),1000);
+  componentDidMount() {
+    this.cambiarDatos();
   };
 
-  async totalInvestors() {
-
-    let esto = await Utils.contract.setstate().call();
-    //console.log(esto);
+  async cambiarDatos() {
+    // llamar blockchain aca
+    let datos = [209, 222, 167, 164, 79, 177];
+    let meses = ['Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre'];
+    //console.log(data);
     this.setState({
-      totalInvestors: parseInt(esto.Investors._hex),
-      totalInvested: parseInt(esto.Invested._hex)/1000000,
-      totalRefRewards: parseInt(esto.RefRewards._hex)/1000000
-
+      data: {
+        labels: meses,
+        datasets: [
+          {
+            label: 'Consumo actual',
+            data: datos,
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)',
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)',
+            ],
+            borderWidth: 1,
+          },
+        ],
+      }
     });
 
   };
@@ -77,6 +83,7 @@ export default class DatosBlockchain extends Component {
       return (
         <>
           <Bar data={data} options={options} />
+          <button type="button" className="btn btn-info" onClick={() => this.cambiarDatos()}>Actualizar datos</button>
         </>
       )
   }
