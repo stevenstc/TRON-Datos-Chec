@@ -3,16 +3,31 @@ import { Bar } from '@reactchartjs/react-chart.js'
 import Utils from "../../utils";
 import contractAddress from "../Contract";
 
-  
+export default class DatosBlockchain extends Component {
+  constructor(props) {
+    super(props);
 
-const rand = () => Math.round(Math.random() * 20 - 10)
-
-const genData = () => ({
+    this.state = {
+      totalInvestors: 0,
+      totalInvested: 0,
+      totalRefRewards: 0,
+      options: {
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+              },
+            },
+          ],
+        },
+      },
+      data:{
   labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
   datasets: [
     {
       label: 'Scale',
-      data: [rand(), rand(), rand(), rand(), rand(), rand()],
+      data: [1, 2, 3, 4, 5, 6],
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',
@@ -32,37 +47,7 @@ const genData = () => ({
       borderWidth: 1,
     },
   ],
-})
-
-const options = {
-  scales: {
-    yAxes: [
-      {
-        ticks: {
-          beginAtZero: true,
-        },
-      },
-    ],
-  },
 }
-
-const Dynamic = () => {
-  const [data, setData] = useState(genData())
-
-  useEffect(() => {
-    const interval = setInterval(() => setData(genData()), 5000)
-
-    return () => clearInterval(interval)
-  }, [])
-
-export default class DatosBlockchain extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      totalInvestors: 0,
-      totalInvested: 0,
-      totalRefRewards: 0
     };
 
     this.totalInvestors = this.totalInvestors.bind(this);
@@ -88,22 +73,11 @@ export default class DatosBlockchain extends Component {
 
 
   render() {
+    const {data, options } = this.state;
       return (
         <>
-          <div className='header'>
-            <h1 className='title'>Dynamic Bar Chart</h1>
-            <div className='links'>
-              <a
-                className='btn btn-gh'
-                href='https://github.com/jerairrest/react-chartjs-2/blob/react16/example/src/charts/Dynamic.js'
-              >
-                Github Source
-              </a>
-            </div>
-          </div>
           <Bar data={data} options={options} />
         </>
       )
-    }
   }
 }
