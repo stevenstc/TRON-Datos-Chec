@@ -13,10 +13,10 @@ y está integrada con [TronLink](https://github.com/TronWatch/TronLink).
 
 para hacer puebas
 
-´´npm run start´´
+`npm run start`
 
 ## Crear Build Final
 
 para colocarlo en un servidor web
 
-´´npm run build´´
+`npm run build`
