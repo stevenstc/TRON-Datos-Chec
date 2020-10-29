@@ -8,3 +8,15 @@ Maneja repositorios de [TronWeb](https://github.com/tronprotocol/tron-web)
 y está integrada con [TronLink](https://github.com/TronWatch/TronLink).
 
 **NOTA: Tienes que tener instalado TronLink para poder interactuar con la pagina, recomiendo instalar  [TronLink desde Chrome Webstore](https://chrome.google.com/webstore/detail/ibnejdfjmmkpcnlpebklmnkoeoihofec/).**
+
+## Iniciar servidor local
+
+para hacer puebas
+
+´´npm run start´´
+
+## Crear Build Final
+
+para colocarlo en un servidor web
+
+´´npm run build´´
