@@ -9,6 +9,10 @@ y está integrada con [TronLink](https://github.com/TronWatch/TronLink).
 
 **NOTA: Tienes que tener instalado TronLink para poder interactuar con la pagina, recomiendo instalar  [TronLink desde Chrome Webstore](https://chrome.google.com/webstore/detail/ibnejdfjmmkpcnlpebklmnkoeoihofec/).**
 
+## Instalar la aplicación
+
+`npm install`
+
 ## Iniciar servidor local
 
 para hacer puebas
