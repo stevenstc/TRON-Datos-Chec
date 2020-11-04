@@ -22,32 +22,34 @@ const TronLinkGuide = props => {
 
     if(!installed) {
         return (
-            <div className='tronLink row' onClick={ openTronLink }>
-                <div className='info col-xs-12 col-md-8'>
-                    <h1>TronLink Required</h1>
+        <div className="container">
+            <div className='row' onClick={ openTronLink }>
+                <div className='col-xs-12 col-md-8'>
+                    <h1>Se necesita TronLink</h1>
                     <p>
-                        To create a post or tip others you must install TronLink. TronLink is a TRON wallet for the browser
-                        that can be <a href={ WEBSTORE_URL } target='_blank' rel='noopener noreferrer'>installed from the Chrome Webstore</a>.
-                        Once installed, return back and refresh the page.
+                        Para consultar su medidor debe tener instalado TronLink. TronLink es una billetera TRON para el navegador, puede usarlar <a href={ WEBSTORE_URL } target='_blank' rel='noopener noreferrer'>installed from the Chrome Webstore</a>.
+                        una vez instalada, regrese y recarge la pagina.
                     </p>
                 </div>
                 { logo }
             </div>
+        </div>
         );
-    }
+    }else{
 
     return (
-        <div className='tronLink hover' onClick={ openTronLink }>
-            <div className='info'>
-                <h1>Log in Required</h1>
+    <div className="container">
+        <div className='row' onClick={ openTronLink }>
+            <div className='col-xs-12 col-md-8'>
+                <h1>Inicie Sesión</h1>
                 <p>
-                    TronLink is installed but you must first log in. Open TronLink from the browser bar and set up your
-                    first wallet or decrypt a previously-created wallet.
+                    TronLink esta instalado pero no ha iniciado sesion. Abra TronLink en la barra del navegador y configure su primer billetera o restaure una billetera ya creada.
                 </p>
             </div>
             { logo }
         </div>
-    );
+    </div>
+    );}
 };
 
 export default TronLinkGuide;

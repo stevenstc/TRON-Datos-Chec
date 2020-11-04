@@ -81,15 +81,14 @@ export default class DatosBlockchain extends Component {
                 </div>
         <div className="col-lg-12">
                     <div className="customwidget text-center">
-                        <h1>Find Your Domain</h1>
-                        <p>With our awesome domain name search form, you can search any domain names with tons of extensions.</p>
-            <p>Pursuing high quality standards, my greatest efforts are focused on producing semantic, SEO-friendly, valid and clean code. In order to stay effective and relevant in this constantly evolving sphere I always try to be in touch with the latest news and recent approaches in programming.</p>
+                        <h1>Elegimos BlockChain por sus ventajas</h1>
+                        <p>Una base de datos centralizados puede ser atacada facilmente.</p>
+                        <p>Aquie es donde entra la tecnologia blochain que son varias copias de la misma base de datos, distribuidas al rededor del mundo, donde solo los administradores pueden realizar cambios, todos y cada uno de los movimientos queda registrado dentro le la blochchain y disponibles para audotoria publica o privada.</p>
                         <ul className="list-inline">
-                            <li><i className="fa fa-check"></i> 20k Domains Sold in 2017</li>
-                            <li><i className="fa fa-check"></i> 4k Website Created</li>
+                            <li><i className="fa fa-check"></i> Disponibilidad 24/7</li>
+                            <li><i className="fa fa-check"></i> Alta escalabilidad para manejo de Datos</li>
                         </ul>
                         
-                        <a href="#" className="hover-btn-new"><span>Hosting Packages</span></a>
                     </div>
                 </div>
         

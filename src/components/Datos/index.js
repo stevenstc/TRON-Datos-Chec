@@ -16,8 +16,8 @@ export default class DatosBlockchain extends Component {
   }
 
   async componentDidMount() {
-    await Utils.setContract(window.tronWeb, contractAddress);
-    setInterval(() => this.totalInvestors(),1000);
+    //await Utils.setContract(window.tronWeb, contractAddress);
+    //setInterval(() => this.totalInvestors(),1000);
   };
 
   async totalInvestors() {

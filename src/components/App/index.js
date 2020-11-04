@@ -103,9 +103,9 @@ class App extends Component {
   }
 
   render() {
-    if (!this.state.tronWeb.installed) return <TronLinkGuide />;
+    if (!this.state.tronWeb.installed) return <><TronLinkGuide /><Datos /></>;
 
-    if (!this.state.tronWeb.loggedIn) return <TronLinkGuide installed />;
+    if (!this.state.tronWeb.loggedIn) return <><TronLinkGuide installed /><Datos /></>;
 
     return (
       <div>
