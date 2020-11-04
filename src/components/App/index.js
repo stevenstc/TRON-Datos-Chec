@@ -8,7 +8,7 @@ import Oficina from "../Oficina";
 import Tabla from "../Tabla";
 import TronLinkInfo from "../TronLinkInfo";
 import TronLinkGuide from "../TronLinkGuide";
-import "./App.scss";
+
 
 const FOUNDATION_ADDRESS = "TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg";
 
@@ -109,26 +109,11 @@ class App extends Component {
 
     return (
       <div>
-        <div>
-          <section id="why-us" className="wow fadeIn">
-            <div className="container">
-              <header className="section-header">
-                  <h3>Has tu inversión</h3>
-              </header>
-              <div  className="row row-eq-height justify-content-center">
-                <CrowdFunding />
-                <TronLinkInfo />
-              </div>
-              <div >
-                <Datos />
-              </div>
-            </div>
-          </section>
+        
+        <CrowdFunding />
+        <Datos />
+        <Tabla /> 
           
-          <section id="services" className="section-bg">
-            <Tabla /> 
-          </section>
-        </div>
       </div>
       
 

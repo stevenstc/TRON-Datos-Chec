@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Utils from "../../utils";
-import "./CrowdFunding.scss";
+
 import contractAddress from "../Contract";
 
 export default class DatosBlockchain extends Component {
@@ -60,25 +60,46 @@ export default class DatosBlockchain extends Component {
   render() {
     
     return (
+
+      <>
       
-      <div className="card wow bounceInUp">
-          <i className="fa fa-diamond"></i>
-        <div className="card-body">
-          <h5 className="card-title">Gold Premium</h5>
-          <h6 className="card-text">
-            Return: <strong>200%</strong><br></br>
-            <strong>2%</strong> per day<br></br>
-          </h6>
-            <form>
-              <div className="form-group">
-                <input type="text" className="form-control" id="amount" placeholder="Min. 200 TRX"></input>
-                <p className="card-text">Debes tener ~3 TRX para hacer la transacción</p>
-              </div>
-            </form>
-          <button type="button" class="btn btn-light" onClick={() => this.deposit()}>Invertir</button>
-          
+      <div id="domain" className="section wb">
+        <div className="container">
+            <div className="row text-center">
+
+                <div className="col-lg-12">
+                    <form className="checkdomain form-inline">
+                        <div className="checkdomain-wrapper">
+                            <div className="form-group">
+                                <label className="sr-only" for="domainnamehere">Número de cuenta</label>
+                                <input type="text" className="form-control" id="domainnamehere" placeholder="Ingrese su numero de cuenta aquí.."></input>
+                                <button type="submit" className="btn btn-primary grd1"><i className="fa fa-search"></i></button>
+                            </div>
+                            
+                        </div>
+                    </form>
+                </div>
+        <div className="col-lg-12">
+                    <div className="customwidget text-center">
+                        <h1>Find Your Domain</h1>
+                        <p>With our awesome domain name search form, you can search any domain names with tons of extensions.</p>
+            <p>Pursuing high quality standards, my greatest efforts are focused on producing semantic, SEO-friendly, valid and clean code. In order to stay effective and relevant in this constantly evolving sphere I always try to be in touch with the latest news and recent approaches in programming.</p>
+                        <ul className="list-inline">
+                            <li><i className="fa fa-check"></i> 20k Domains Sold in 2017</li>
+                            <li><i className="fa fa-check"></i> 4k Website Created</li>
+                        </ul>
+                        
+                        <a href="#" className="hover-btn-new"><span>Hosting Packages</span></a>
+                    </div>
+                </div>
+        
+                
+            </div>
         </div>
-      </div>
+    </div>
+
+
+</>
         
 
 
