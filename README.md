@@ -1,4 +1,4 @@
-## TRON Datos-en-Blockchain
+## TRON Datos
 
 [Online Demo](https://stevenstc.github.io/TRON-Datos/)
 
@@ -9,18 +9,21 @@ y está integrada con [TronLink](https://github.com/TronWatch/TronLink).
 
 **NOTA: Tienes que tener instalado TronLink para poder interactuar con la pagina, recomiendo instalar  [TronLink desde Chrome Webstore](https://chrome.google.com/webstore/detail/ibnejdfjmmkpcnlpebklmnkoeoihofec/).**
 
+
+
 ## Instalar la aplicación
 
 `npm install`
 
 ## Iniciar servidor local
 
-para hacer puebas
+Para hacer pruebas en **localhost:3000**
 
 `npm run start`
 
 ## Crear Build Final
 
-para colocarlo en un servidor web
+Para colocarlo en un servidor web, recuerda cambiar el **homepage** en **package.json** 
 
 `npm run build`
+
