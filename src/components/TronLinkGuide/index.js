@@ -23,7 +23,7 @@ const TronLinkGuide = props => {
     if(!installed) {
         return (
         <div className="container">
-            <div className='row' onClick={ openTronLink }>
+            <div className='row mt-4' onClick={ openTronLink }>
                 <div className='col-xs-12 col-md-8'>
                     <h1>Se necesita TronLink</h1>
                     <p>
@@ -39,7 +39,7 @@ const TronLinkGuide = props => {
 
     return (
     <div className="container">
-        <div className='row' onClick={ openTronLink }>
+        <div className='row mt-4' onClick={ openTronLink }>
             <div className='col-xs-12 col-md-8'>
                 <h1>Inicie Sesión</h1>
                 <p>

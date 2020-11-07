@@ -82,8 +82,60 @@ export default class DatosBlockchain extends Component {
     const {data, options } = this.state;
       return (
         <>
-          <Bar data={data} options={options} />
-          <button type="button" className="btn btn-info" onClick={() => this.cambiarDatos()}>Actualizar datos</button>
+        <div id="pricing" className="section lb">
+        <div className="container">
+
+            <div className="row">
+                <div className="col-md-12">
+                    <div className="tab-content">
+                        <div className="tab-pane active fade show" id="tab1">
+                            <div className="row text-center">
+                                <div className="col-md-4">
+                                    <div className="pricing-table pricing-table-highlighted">
+                                        <div className="pricing-table-header grd1">
+                                            <h2>Consumo actual</h2>
+                                            <h3>lectura | 39.857</h3>
+                                        </div>
+                                        <div className="pricing-table-space"></div>
+                                        <div className="pricing-table-features">
+                                            <p><i className="fa fa-envelope-o"></i> <strong>170 KW</strong> Este mes</p>
+                                            <p><i className="fa fa-rocket"></i> <strong>5,66 KW</strong> cada día</p>
+                                            <p><i className="fa fa-life-ring"></i> <strong>0,236 KW</strong> cada hora</p>
+                                            <p><i className="fa fa-database"></i> <strong>$73.100</strong> Valor Total</p>
+                                        </div>
+                                        <div className="pricing-table-sign-up">
+                                          <a href="#" className="hover-btn-new"><span>Ver consumo anterior</span></a>
+                                          <hr></hr>
+                                            <a href="#" className="hover-btn-new"><span>Ver consumo Siguiente</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-8">
+                                    <div className="pricing-table pricing-table-highlighted">
+                                        <div className="pricing-table-header grd1">
+                                            <h2>Consumo Últimos 6 meses</h2>
+                                            <h2>Promedio 170</h2>
+                                        </div>
+                                        <div className="pricing-table-space"></div>
+                                        <div className="pricing-table-features">
+                                          <Bar data={data} options={options} />
+                                        </div>
+                                        <div className="pricing-table-sign-up">
+                                            <a href="#" className="hover-btn-new"><span>Actualizar Ahora</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+          
         </>
       )
   }

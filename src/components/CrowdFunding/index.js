@@ -71,24 +71,24 @@ export default class DatosBlockchain extends Component {
                     <form className="checkdomain form-inline">
                         <div className="checkdomain-wrapper">
                             <div className="form-group">
+                            <h1>Escriba su número de cuenta para consultar</h1>
                                 <label className="sr-only" for="domainnamehere">Número de cuenta</label>
-                                <input type="text" className="form-control" id="domainnamehere" placeholder="Ingrese su numero de cuenta aquí.."></input>
+                                <input type="text" className="form-control" id="domainnamehere" placeholder="123456789"></input>
                                 <button type="submit" className="btn btn-primary grd1"><i className="fa fa-search"></i></button>
                             </div>
                             
                         </div>
                     </form>
                 </div>
-        <div className="col-lg-12">
+
+                <div className="col-lg-12">
                     <div className="customwidget text-center">
-                        <h1>Elegimos BlockChain por sus ventajas</h1>
                         <p>Una base de datos centralizados puede ser atacada facilmente.</p>
-                        <p>Aquie es donde entra la tecnologia blochain que son varias copias de la misma base de datos, distribuidas al rededor del mundo, donde solo los administradores pueden realizar cambios, todos y cada uno de los movimientos queda registrado dentro le la blochchain y disponibles para audotoria publica o privada.</p>
+                        <p>La tecnologia BlockChain consta de varias copias de la misma base de datos, distribuidas al rededor del mundo, donde solo los administradores pueden realizar cambios, todos y cada uno de los movimientos queda registrado dentro le la blochchain y disponibles para audotoria publica o privada.</p>
                         <ul className="list-inline">
-                            <li><i className="fa fa-check"></i> Disponibilidad 24/7</li>
+                            <li><i className="fa fa-check"></i> Disponibilidad 24/7 de la información</li>
                             <li><i className="fa fa-check"></i> Alta escalabilidad para manejo de Datos</li>
                         </ul>
-                        
                     </div>
                 </div>
         
