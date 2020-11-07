@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import TronWeb from "tronweb";
 
 import Utils from "../../utils";
-import CrowdFunding from "../CrowdFunding";
+import Consulta from "../Consulta";
 import Datos from "../Datos";
 import Oficina from "../Oficina";
-import Tabla from "../Tabla";
+import Cuenta from "../Cuenta";
 import TronLinkInfo from "../TronLinkInfo";
 import TronLinkGuide from "../TronLinkGuide";
 
@@ -111,9 +111,9 @@ class App extends Component {
       <div>
         <Datos />
         
-        <CrowdFunding />
+        <Consulta />
         
-        <Tabla /> 
+        <Cuenta /> 
           
       </div>
       
