@@ -13,7 +13,7 @@ contract DatosEnBlockchain  {
   struct Lectura {
     uint medida;
     uint block;
-    uint timestamp;
+    uint timestampa;
   }
   
   struct Cuenta {
@@ -25,7 +25,6 @@ contract DatosEnBlockchain  {
     address autoridad;
     Lectura[] lecturas;
     uint x;
-    
   }
 
   struct Autoridad {
@@ -38,7 +37,6 @@ contract DatosEnBlockchain  {
 
   mapping (uint => Cuenta) public cuentas;
   mapping (address => Autoridad) public autoridades;
-  
 
   event Consumo(uint medida, uint blocke, uint tiempo);
   event NuevoAdmin(address medida, uint blocke, uint tiempo);
@@ -69,13 +67,11 @@ contract DatosEnBlockchain  {
     uint nlecturas = cuentas[cuenta].x;
     uint medida =  cuentas[cuenta].lecturas[x].medida;
     uint blocky =  cuentas[cuenta].lecturas[x].block;
-    uint timestamp =  cuentas[cuenta].lecturas[x].timestamp;
+    uint timestampa =  cuentas[cuenta].lecturas[x].timestampa;
     
-    return (nlecturas, medida, blocky, timestamp);
+    return (nlecturas, medida, blocky, timestampa);
     
   }
-  
-  
 
   function registarAdmin(address direccion, uint nivel) external {
     
@@ -84,8 +80,6 @@ contract DatosEnBlockchain  {
     autoridades[direccion].registered = true;
     autoridades[direccion].blockeCreacion = block.number;
     autoridades[direccion].nivel = nivel;
-
-
 
     emit NuevoAdmin(direccion, block.number, block.timestamp);
     
@@ -98,8 +92,6 @@ contract DatosEnBlockchain  {
     autoridades[direccion].registered = false;
     autoridades[direccion].blockeCreacion = block.number;
     autoridades[direccion].nivel = 0;
-
-
 
     emit AdminRemovido(direccion, block.number, block.timestamp);
     
