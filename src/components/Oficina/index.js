@@ -30,22 +30,24 @@ export default class DatosBlockchain extends Component {
 
   async getLecturas(){
     const { lecturas } = this.state;
+    lecturas.splice(0);
     await fetch(this.state.url)
     .then(res => res.json())
     .then(res => {
       
+
       for (var i = res.results.length - 1; i >= 0; i--) {
         let nombre = res.results[i].name;
         let item = (
             <div className="alert alert alert-success" role="alert">
-              <div className="mb-2 text-muted">pokemon: {nombre}</div>
+              <div className="mb-2 text-muted">Cuenta: {nombre}</div>
             </div>
         );
         lecturas.splice(0,0,item);
       }
 
 
-      //console.log(res.results);
+      console.log(res.results);
 
     });
   }
@@ -79,7 +81,7 @@ export default class DatosBlockchain extends Component {
     const { isowner, lecturas } = this.state;
     if (true) {
       return (
-      <div className="col-lg-5 mb-5">
+      <div className="col-lg-12 mb-12">
         <div className="card wow bounceInUp">
           <div className="card-body">
             <h5 className="card-title">Panel Owner</h5>
