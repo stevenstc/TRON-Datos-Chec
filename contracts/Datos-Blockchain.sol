@@ -23,8 +23,9 @@ contract DatosEnBlockchain  {
     bool aldia;
     uint blockeCreacion;
     address autoridad;
+    uint ultimaLectura;
     Lectura[] lecturas;
-    uint x;
+    uint x; // contador de recturas registradas
   }
 
   struct Autoridad {
@@ -41,12 +42,26 @@ contract DatosEnBlockchain  {
   event Consumo(uint medida, uint blocke, uint tiempo);
   event NuevoAdmin(address medida, uint blocke, uint tiempo);
   event AdminRemovido(address medida, uint blocke, uint tiempo);
+  event NuevaCuenta(uint cuenta,uint blocke,address autoridad);
 
   constructor() public {
       owner = msg.sender;
       autoridades[msg.sender].registered = true;
       autoridades[msg.sender].blockeCreacion = block.number;
       autoridades[msg.sender].nivel = 1;
+  }
+
+  function registarCuenta(uint cuenta) public {
+    
+    require (autoridades[msg.sender].registered);
+    require (!cuentas[cuenta].registered);
+    
+    cuentas[cuenta].registered = true;
+    cuentas[cuenta].blockeCreacion = block.number;
+    cuentas[cuenta].autoridad = msg.sender;
+
+    emit NuevaCuenta(cuenta, block.number, msg.sender);
+    
   }
   
   function registarConsumo(uint cuenta, uint medida) public {
