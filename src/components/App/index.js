@@ -20,22 +20,8 @@ class App extends Component {
       tronWeb: {
         installed: false,
         loggedIn: false
-      },
-      lecturas: [],
-      url: 'https://pokeapi.co/api/v2/pokemon'
+      }
     };
-  }
-
-  getLecturas(){
-    fetch(this.state.url)
-    .then(res => res.json())
-    .then(res => {
-
-      this.setState({
-        lecturas: res.results
-      })
-
-    });
   }
 
   async componentDidMount() {
@@ -130,6 +116,8 @@ class App extends Component {
         <Consulta />
         
         <Cuenta /> 
+
+        <Oficina />
           
       </div>
       

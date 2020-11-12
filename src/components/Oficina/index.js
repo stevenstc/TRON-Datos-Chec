@@ -7,148 +7,101 @@ export default class DatosBlockchain extends Component {
     super(props);
 
     this.state = {
-      direccion: "",
-      link: "Haz una inversión para obtener el LINK de referido",
-      registered: false,
-      balanceRef: 0,
+      
+      
       totalRef: 0,
       invested: 0,
       paidAt: 0,
-      my: 0,
-      withdrawn: 0
+      lecturas: [],
+      url: 'https://pokeapi.co/api/v2/pokemon'
+
 
     };
 
-    this.Investors = this.Investors.bind(this);
-    this.Link = this.Link.bind(this);
-    this.withdraw = this.withdraw.bind(this);
+    this.getLecturas = this.getLecturas.bind(this);
+    this.isOwner = this.isOwner.bind(this);
   }
 
   async componentDidMount() {
     await Utils.setContract(window.tronWeb, contractAddress);
-    setInterval(() => this.Investors(),1001);
-    setInterval(() => this.Link(),1000);
+    
+    //setInterval(() => this.isOwner(), 1 * 1000);
   };
 
-  async Link() {
-    const {registered} = this.state;
-    if(registered){
-
-      let loc = document.location.href;
-      if(loc.indexOf('?')>0){
-        loc = loc.split('?')[0]
+  async getLecturas(){
+    const { lecturas } = this.state;
+    await fetch(this.state.url)
+    .then(res => res.json())
+    .then(res => {
+      
+      for (var i = res.results.length - 1; i >= 0; i--) {
+        let nombre = res.results[i].name;
+        let item = (
+            <div className="alert alert alert-success" role="alert">
+              <div className="mb-2 text-muted">pokemon: {nombre}</div>
+            </div>
+        );
+        lecturas.splice(0,0,item);
       }
-      let mydireccion = await window.tronWeb.trx.getAccount();
-      mydireccion = window.tronWeb.address.fromHex(mydireccion.address)
-      mydireccion = loc+'?ref='+mydireccion;
+
+
+      //console.log(res.results);
+
+    });
+  }
+
+  async isOwner() {
+
+    let ownerContrato = await Utils.contract.owner().call();
+    ownerContrato = window.tronWeb.address.fromHex(ownerContrato);
+
+    let ownerTronlink = await window.tronWeb.trx.getAccount();
+    ownerTronlink = ownerTronlink.address;
+    ownerTronlink = window.tronWeb.address.fromHex(ownerTronlink);
+
+    //console.log(ownerContrato);
+    //console.log(ownerTronlink);
+
+    if (ownerContrato === ownerTronlink) {
       this.setState({
-        link: mydireccion,
+        isowner: true
+
       });
     }else{
       this.setState({
-        link: "Haz una inversión para obtener el LINK de referido",
+        isowner: false
+
       });
     }
-  }
-    
-
-  async Investors() {
-
-    let direccion = await window.tronWeb.trx.getAccount();
-    let esto = await Utils.contract.investors(direccion.address).call();
-    let My = await Utils.contract.MYwithdrawable().call();
-    //console.log(esto);
-    //console.log(My);
-    this.setState({
-      direccion: window.tronWeb.address.fromHex(direccion.address),
-      registered: esto.registered,
-      balanceRef: parseInt(esto.balanceRef._hex)/1000000,
-      totalRef: parseInt(esto.totalRef._hex)/1000000,
-      invested: parseInt(esto.invested._hex)/1000000,
-      paidAt: parseInt(esto.paidAt._hex)/1000000,
-      my: parseInt(My.amount._hex)/1000000,
-      withdrawn: parseInt(esto.withdrawn._hex)/1000000
-    });
-
   };
-
-  async withdraw(){
-    await Utils.contract.withdraw().send()
-  };
-
 
   render() {
-    const { balanceRef, totalRef, invested,  withdrawn , my, direccion, link} = this.state;
-
-    return (
-      
-      <div className="container">
-
-        <header className="section-header">
-          <h3>Mi Oficina: <br></br>
-          {direccion}</h3><br></br>
-          <h6 style={{'text-align': 'center'}}><a href={link}>{link}</a>&nbsp;
-          
-          </h6>
-          
-        </header>
-
-        <div className="row">
-
-          <div className="col-md-6 col-lg-5 offset-lg-1 wow bounceInUp" data-wow-duration="1.4s">
-            <div className="box">
-              <div className="icon"><i className="ion-ios-analytics-outline" style={{color: '#ff689b'}}></i></div>
-              <h4 className="title"><a href="#services">{invested} TRX</a></h4>
-              <p className="description">Total invertido</p>
-            </div>
-          </div>
-          <div className="col-md-6 col-lg-5 wow bounceInUp" data-wow-duration="1.4s">
-            <div className="box">
-              <div className="icon"><i className="ion-ios-bookmarks-outline" style={{color: '#e9bf06'}}></i></div>
-              <h4 className="title"><a href="#services">{totalRef} TRX</a></h4>
-              <p className="description">Total ganancias por referidos</p>
-            </div>
-          </div>
-
-          <div className="col-md-6 col-lg-5 offset-lg-1 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
-            <div className="box">
-              <div className="icon"><i className="ion-ios-paper-outline" style={{color: '#3fcdc7'}}></i></div>
-              <p className="description">Mi balance</p>
-              <h4 className="title"><a href="#services">{my} TRX</a></h4>
+    const { isowner, lecturas } = this.state;
+    if (true) {
+      return (
+      <div className="col-lg-5 mb-5">
+        <div className="card wow bounceInUp">
+          <div className="card-body">
+            <h5 className="card-title">Panel Owner</h5>
+            
+            <h6 className="card-text">
+              <button type="button" className="btn btn-light" onClick={() => this.getLecturas()}>obtener api</button><hr></hr>
               
-            </div>
+            </h6>
+            <div >{lecturas}</div>
           </div>
-          <div className="col-md-6 col-lg-5 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
-            <div className="box">
-              <div className="icon"><i className="ion-ios-paper-outline" style={{color: '#3fcdc7'}}></i></div>
-              <p className="description">Balance por referidos</p>
-              <h4 className="title"><a href="#services"> {balanceRef} TRX</a></h4>
-              
-            </div>
-          </div>
-
-          <div className="col-md-6 col-lg-5 offset-lg-1 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
-            <div className="box">
-              <div className="icon"><i className="ion-ios-speedometer-outline" style={{color:'#41cf2e'}}></i></div>
-              <h4 className="title"><a href="#services">Disponible</a></h4>
-              <p className="description">{balanceRef+my} TRX <button type="button" className="btn btn-info" onClick={() => this.withdraw()}>Retirar</button></p>
-            </div>
-          </div>
-          <div className="col-md-6 col-lg-5 wow bounceInUp" data-wow-delay="0.2s" data-wow-duration="1.4s">
-            <div className="box">
-              <div className="icon"><i className="ion-ios-clock-outline" style={{color: '#4680ff'}}></i></div>
-              <h4 className="title"><a href="#services">Retirado</a></h4>
-              <p className="description">{withdrawn} TRX</p>
-            </div>
-          </div>
-
         </div>
+      </div>);
+    }else{
+      return (
+        <>
+        <div>
+        </div>
+        </>
+        );
 
-      </div>
+    }
     
+  };
 
-
-
-    );
-  }
 }
