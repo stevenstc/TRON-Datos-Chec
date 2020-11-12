@@ -79,6 +79,7 @@ contract DatosEnBlockchain  {
   function verConsumo (uint cuenta, uint x) public view returns(uint, uint, uint, uint) {
     
     require(x < cuentas[cuenta].x);
+    
     uint nlecturas = cuentas[cuenta].x;
     uint medida =  cuentas[cuenta].lecturas[x].medida;
     uint blocky =  cuentas[cuenta].lecturas[x].block;
