@@ -51,6 +51,13 @@ contract DatosEnBlockchain  {
       autoridades[msg.sender].nivel = 1;
   }
 
+
+  function owner() public returns(address) {
+    
+    return owner;
+    
+  }
+
   function registarCuenta(uint cuenta) public {
     
     require (autoridades[msg.sender].registered);
