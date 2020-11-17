@@ -25,7 +25,7 @@ contract DatosEnBlockchain  {
     address autoridad;
     uint ultimaLectura;
     Lectura[] lecturas;
-    uint x; // contador de recturas registradas
+    uint x; // contador de lecturas registradas
   }
 
   struct Autoridad {
@@ -77,7 +77,8 @@ contract DatosEnBlockchain  {
     require (autoridades[msg.sender].registered);
     require (cuentas[cuenta].registered);
     
-    cuentas[cuenta].x = cuentas[cuenta].x++;
+    cuentas[cuenta].x = cuentas[cuenta].x+1;
+    cuentas[cuenta].ultimaLectura = medida;
     cuentas[cuenta].lecturas.push(Lectura(medida, block.number, block.timestamp));
 
     emit Consumo(medida, block.number, block.timestamp);
