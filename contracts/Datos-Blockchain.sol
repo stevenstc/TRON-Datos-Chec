@@ -52,13 +52,13 @@ contract DatosEnBlockchain  {
   }
 
 
-  function owner() public returns(address) {
+  function owner() public view returns(address) {
     
     return owner;
     
   }
 
-  function registarCuenta(uint cuenta) public {
+  function registarCuenta(uint cuenta, uint contador) public {
     
     require (autoridades[msg.sender].registered);
     require (!cuentas[cuenta].registered);
@@ -66,6 +66,7 @@ contract DatosEnBlockchain  {
     cuentas[cuenta].registered = true;
     cuentas[cuenta].blockeCreacion = block.number;
     cuentas[cuenta].autoridad = msg.sender;
+    cuentas[cuenta].contador = contador;
 
     emit NuevaCuenta(cuenta, block.number, msg.sender);
     

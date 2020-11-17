@@ -7,7 +7,7 @@ export default class DatosBlockchain extends Component {
   constructor(props) {
     super(props);
 
-    this.deposit = this.deposit.bind(this);
+    this.consulta = this.consulta.bind(this);
   }
 
   async componentDidMount() {
@@ -15,45 +15,17 @@ export default class DatosBlockchain extends Component {
   };
 
 
-  async deposit() {
+  async consulta() {
 
-    var loc = document.location.href;
-    if(loc.indexOf('?')>0){
-        var getString = loc.split('?')[1];
-        var GET = getString.split('&');
-        var get = {};
-        for(var i = 0, l = GET.length; i < l; i++){
-            var tmp = GET[i].split('=');
-            get[tmp[0]] = unescape(decodeURI(tmp[1]));
-        }
-        if (get['capital']) {
-          document.getElementById('tarifa').value = 1;
-          document.getElementById('sponsor').value = 'T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb';
-        }else{
-          if (get['ref'].length === 34) {
-            document.getElementById('tarifa').value = 0;
-            document.getElementById('sponsor').value = get['ref'];            
-          }else{
-            document.getElementById('tarifa').value = 0;
-             document.getElementById('sponsor').value = 'T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb';
-          }
-        }
-        
-    }else{
-        document.getElementById('tarifa').value = 0;
-        document.getElementById('sponsor').value = 'T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb'; 
-    }
+    
 
-    let amount = document.getElementById("amount").value;
-    let sponsor = document.getElementById("sponsor").value;
-    let tarifa = document.getElementById("tarifa").value;
+    let cuenta = document.getElementById("cuenta").value;
+    let x = 1;
 
-    document.getElementById("amount").value = "";
+    let cosas = Utils.contract.verConsumo(cuenta, x).call();
   
-    return Utils.contract.deposit(tarifa, sponsor).send({
-      shouldPollResponse: true,
-      callValue: amount * 1000000 // converted to SUN
-    });
+    console.log(cosas);
+    
     
   };
 
@@ -73,8 +45,8 @@ export default class DatosBlockchain extends Component {
                             <div className="form-group">
                             <h1>Escriba su número de cuenta para consultar</h1>
                                 <label className="sr-only" for="domainnamehere">Número de cuenta</label>
-                                <input type="text" className="form-control" id="domainnamehere" placeholder="123456789"></input>
-                                <button type="submit" className="btn btn-primary grd1"><i className="fa fa-search"></i></button>
+                                <input type="text" className="form-control" id="cuenta" placeholder="123456789"></input>
+                                <button type="button" className="btn btn-primary grd1" onClick={() => this.consulta()}><i className="fa fa-search"></i></button>
                             </div>
                             
                         </div>
