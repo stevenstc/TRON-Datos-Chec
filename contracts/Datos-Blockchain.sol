@@ -32,8 +32,12 @@ contract DatosEnBlockchain  {
     bool registered;
     uint blockeCreacion;
     uint nivel;
+    string nombre;
   }
-  
+
+  uint public cuentasActivas;
+  uint public certificados;
+  uint public kilowatt;
   address public owner;
 
   mapping (uint => Cuenta) public cuentas;
@@ -44,17 +48,18 @@ contract DatosEnBlockchain  {
   event AdminRemovido(address medida, uint blocke, uint tiempo);
   event NuevaCuenta(uint cuenta,uint blocke,address autoridad);
 
-  constructor() public {
+  constructor(string _nombre) public {
       owner = msg.sender;
       autoridades[msg.sender].registered = true;
       autoridades[msg.sender].blockeCreacion = block.number;
       autoridades[msg.sender].nivel = 1;
+      autoridades[msg.sender].nombre = _nombre;
+
   }
 
-
-  function owner() public view returns(address) {
+  function setstate() public view returns(uint, uint, uint, address) {
     
-    return owner;
+    return (cuentasActivas, certificados, kilowatt, owner);
     
   }
 
@@ -68,6 +73,8 @@ contract DatosEnBlockchain  {
     cuentas[cuenta].autoridad = msg.sender;
     cuentas[cuenta].contador = contador;
 
+    cuentasActivas++;
+
     emit NuevaCuenta(cuenta, block.number, msg.sender);
     
   }
@@ -80,6 +87,8 @@ contract DatosEnBlockchain  {
     cuentas[cuenta].x = cuentas[cuenta].x+1;
     cuentas[cuenta].ultimaLectura = medida;
     cuentas[cuenta].lecturas.push(Lectura(medida, block.number, block.timestamp));
+
+    kilowatt = kilowatt + medida;
 
     emit Consumo(medida, block.number, block.timestamp);
     
@@ -98,13 +107,14 @@ contract DatosEnBlockchain  {
     
   }
 
-  function registarAdmin(address direccion, uint nivel) external {
+  function registarAdmin(address direccion, uint nivel, string nombre) external {
     
     require (msg.sender == owner);
 
     autoridades[direccion].registered = true;
     autoridades[direccion].blockeCreacion = block.number;
     autoridades[direccion].nivel = nivel;
+    autoridades[direccion].nombre = nombre;
 
     emit NuevoAdmin(direccion, block.number, block.timestamp);
     

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import TronWeb from "tronweb";
 
+import TronWeb from "tronweb";
 import Utils from "../../utils";
+
 import Consulta from "../Consulta";
 import Datos from "../Datos";
 import Oficina from "../Oficina";
 import Cuenta from "../Cuenta";
-import TronLinkInfo from "../TronLinkInfo";
 import TronLinkGuide from "../TronLinkGuide";
 
 
