@@ -23,29 +23,26 @@ export default class DatosBlockchain extends Component {
   }
 
   async componentDidMount() {
-    await Utils.setContract(window.tronWeb, contractAddress);
-    
+    await Utils.setContract(window.tronWeb, contractAddress);    
     //setInterval(() => this.isOwner(), 1 * 1000);
   };
 
   async getLecturas(){
     const { lecturas } = this.state;
     lecturas.splice(0);
+
     await fetch(this.state.url)
     .then(res => res.json())
     .then(res => {
-      
-
       for (var i = res.results.length - 1; i >= 0; i--) {
-        let nombre = res.results[i].name;
-        let item = (
+        var nombre = res.results[i].name;
+            var item = (
             <div className="alert alert alert-success" role="alert">
               <div className="mb-2 text-muted">Cuenta: {nombre}</div>
             </div>
         );
         lecturas.splice(0,0,item);
       }
-
 
       console.log(res.results);
 
