@@ -31,7 +31,6 @@ contract DatosEnBlockchain  {
   struct Autoridad {
     bool registered;
     uint blockeCreacion;
-    uint nivel;
     string nombre;
   }
 
@@ -52,7 +51,6 @@ contract DatosEnBlockchain  {
       owner = msg.sender;
       autoridades[msg.sender].registered = true;
       autoridades[msg.sender].blockeCreacion = block.number;
-      autoridades[msg.sender].nivel = 1;
       autoridades[msg.sender].nombre = _nombre;
 
   }
@@ -63,7 +61,7 @@ contract DatosEnBlockchain  {
     
   }
 
-  function registarCuenta(uint cuenta, uint contador) public {
+  function registarCuenta(uint cuenta, uint contador, uint estrato) public returns(bool) {
     
     require (autoridades[msg.sender].registered);
     require (!cuentas[cuenta].registered);
@@ -72,25 +70,31 @@ contract DatosEnBlockchain  {
     cuentas[cuenta].blockeCreacion = block.number;
     cuentas[cuenta].autoridad = msg.sender;
     cuentas[cuenta].contador = contador;
+    cuentas[cuenta].estrato = estrato;
 
     cuentasActivas++;
 
     emit NuevaCuenta(cuenta, block.number, msg.sender);
+    return true;
     
   }
   
-  function registarConsumo(uint cuenta, uint medida) public {
+  function registarConsumo(uint cuenta, uint medida) public returns(bool, uint) {
     
     require (autoridades[msg.sender].registered);
     require (cuentas[cuenta].registered);
     
     cuentas[cuenta].x = cuentas[cuenta].x+1;
+    uint medidaA = cuentas[cuenta].ultimaLectura;
     cuentas[cuenta].ultimaLectura = medida;
     cuentas[cuenta].lecturas.push(Lectura(medida, block.number, block.timestamp));
 
-    kilowatt = kilowatt + medida;
+    medidaA = medida - medidaA;
+
+    kilowatt = kilowatt + medidaA;
 
     emit Consumo(medida, block.number, block.timestamp);
+    return (true, kilowatt);
     
   }
 
@@ -103,32 +107,34 @@ contract DatosEnBlockchain  {
     uint blocky =  cuentas[cuenta].lecturas[x].block;
     uint timestampa =  cuentas[cuenta].lecturas[x].timestampa;
     
-    return (nlecturas, medida, blocky, timestampa);
+    return (nlecturas-1, medida, blocky, timestampa);
     
   }
 
-  function registarAdmin(address direccion, uint nivel, string nombre) external {
+  function registarAdmin(address direccion, string nombre) external returns(bool, address, string) {
     
     require (msg.sender == owner);
 
     autoridades[direccion].registered = true;
     autoridades[direccion].blockeCreacion = block.number;
-    autoridades[direccion].nivel = nivel;
     autoridades[direccion].nombre = nombre;
 
     emit NuevoAdmin(direccion, block.number, block.timestamp);
     
+    return (true, direccion, nombre);
+    
   }
 
-  function quitarAdmin(address direccion) external {
+  function quitarAdmin(address direccion) external returns(bool, address, uint) {
     
     require (msg.sender == owner);
 
     autoridades[direccion].registered = false;
     autoridades[direccion].blockeCreacion = block.number;
-    autoridades[direccion].nivel = 0;
 
     emit AdminRemovido(direccion, block.number, block.timestamp);
+
+    return (true, direccion, block.number);
     
   }
 
