@@ -7,34 +7,35 @@ export default class DatosBlockchain extends Component {
     super(props);
 
     this.state = {
-      totalInvestors: 0,
-      totalInvested: 0,
-      totalRefRewards: 0
+      kwproducidos: 0,
+      contadoresactivos: 0,
+      certificados: 0
     };
 
-    this.totalInvestors = this.totalInvestors.bind(this);
+    this.estado = this.estado.bind(this);
   }
 
   async componentDidMount() {
-    //await Utils.setContract(window.tronWeb, contractAddress);
-    //setInterval(() => this.totalInvestors(),1000);
+    await Utils.setContract(window.tronWeb, contractAddress);
+    setInterval(() => this.estado(),1000);
   };
 
-  async totalInvestors() {
+  async estado() {
 
     let esto = await Utils.contract.setstate().call();
     //console.log(esto);
+    
     this.setState({
-      totalInvestors: parseInt(esto.Investors._hex),
-      totalInvested: parseInt(esto.Invested._hex)/1000000,
-      totalRefRewards: parseInt(esto.RefRewards._hex)/1000000
+      kwproducidos: parseInt(esto[2]._hex),
+      contadoresactivos: parseInt(esto[0]._hex),
+      certificados: parseInt(esto[1]._hex)
 
     });
 
   };
 
   render() {
-    const { totalInvestors, totalInvested, totalRefRewards } = this.state;
+    const { kwproducidos, contadoresactivos, certificados } = this.state;
 
     return (
       <div className="section cl">
@@ -42,20 +43,20 @@ export default class DatosBlockchain extends Component {
           <div className="row text-left stat-wrap">
             <div className="col-md-4 col-sm-4 col-xs-12">
               <span data-scroll className="global-radius icon_wrap effect-1 alignleft"><i className="flaticon-hosting"></i></span>
-              <p className="stat_count">12000</p>
+              <p className="stat_count">{kwproducidos}</p>
               <h3>KW Producidos</h3>
             </div>
 
             <div className="col-md-4 col-sm-4 col-xs-12">
               <span data-scroll className="global-radius icon_wrap effect-1 alignleft"><i className="flaticon-domain-registration"></i></span>
-              <p className="stat_count">24000</p>
-              <h3>Contadores Activados</h3>
+              <p className="stat_count">{contadoresactivos}</p>
+              <h3>Contadores Activos</h3>
             </div>
 
             <div className="col-md-4 col-sm-4 col-xs-12">
               <span data-scroll className="global-radius icon_wrap effect-1 alignleft"><i className="flaticon-mail"></i></span>
-              <p className="stat_count">5000</p>
-              <h3>Registros</h3>
+              <p className="stat_count">{certificados}</p>
+              <h3>Certificados emitidos</h3>
             </div>
           </div>
         </div>

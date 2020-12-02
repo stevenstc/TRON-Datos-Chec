@@ -37,12 +37,14 @@ export default class DatosBlockchain extends Component {
     this.cambiarDatos = this.cambiarDatos.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    await Utils.setContract(window.tronWeb, contractAddress); 
     this.cambiarDatos();
   };
 
   async cambiarDatos() {
     // llamar blockchain aca
+
     let datos = [209, 222, 167, 164, 79, 177];
     let meses = ['Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre'];
     //console.log(data);
@@ -104,9 +106,9 @@ export default class DatosBlockchain extends Component {
                                             <p><i className="fa fa-database"></i> <strong>$73.100</strong> Valor Total</p>
                                         </div>
                                         <div className="pricing-table-sign-up">
-                                          <a href="#" className="hover-btn-new"><span>Ver consumo anterior</span></a>
+                                          <a href="#inicio" className="hover-btn-new"><span>Ver consumo anterior</span></a>
                                           <hr></hr>
-                                            <a href="#" className="hover-btn-new"><span>Ver consumo Siguiente</span></a>
+                                            <a href="#inicio" className="hover-btn-new"><span>Ver consumo Siguiente</span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -121,7 +123,7 @@ export default class DatosBlockchain extends Component {
                                           <Bar data={data} options={options} />
                                         </div>
                                         <div className="pricing-table-sign-up">
-                                            <a href="#" className="hover-btn-new"><span>Actualizar Ahora</span></a>
+                                            <a href="#inicio" className="hover-btn-new"><span>Actualizar Ahora</span></a>
                                             <hr></hr>
                                             <a href="certificado.html" className="hover-btn-new"><span>Imprimir Certificado</span></a>
                                         </div>

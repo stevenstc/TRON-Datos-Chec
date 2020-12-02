@@ -1,11 +1,7 @@
 {
-  "name": "Datos-en-Blockchain",
+  "name": "datos-en-blockchain",
   "version": "1.0.0",
   "description": "Es la aplicacion para registrar y auditar datos de tomas de medidas Blockchcain tron",
-  "main": "tronbox.js",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js && npx rimraf docs && npx move-cli build docs",
@@ -15,12 +11,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stevenstc/CrowfundingTRX.git"
+    "url": "git+https://github.com/stevenstc"
   },
   "author": "Steven CL",
   "license": "Apache 2.0",
   "bugs": {
-    "url": "https://github.com/stevenstc/CrowfundingTRX/issues"
+    "url": "https://github.com/stevenstc"
   },
   "homepage": "https://Datos-en-Blockchain.ml/",
   "dependencies": {

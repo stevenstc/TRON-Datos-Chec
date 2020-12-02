@@ -5,7 +5,6 @@ import Utils from "../../utils";
 
 import Consulta from "../Consulta";
 import Datos from "../Datos";
-import Oficina from "../Oficina";
 import Cuenta from "../Cuenta";
 import TronLinkGuide from "../TronLinkGuide";
 
@@ -105,7 +104,7 @@ class App extends Component {
   }
 
   render() {
-    if (!this.state.tronWeb.installed) return <><Datos /><TronLinkGuide /></>;
+    if (!this.state.tronWeb.installed) return <><TronLinkGuide /></>;
 
     if (!this.state.tronWeb.loggedIn) return <><Datos /><TronLinkGuide installed /></>;
 
@@ -116,8 +115,6 @@ class App extends Component {
         <Consulta />
         
         <Cuenta /> 
-
-        <Oficina />
           
       </div>
       
