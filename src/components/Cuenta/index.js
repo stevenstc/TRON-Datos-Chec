@@ -123,9 +123,7 @@ export default class DatosBlockchain extends Component {
                                           <Bar data={data} options={options} />
                                         </div>
                                         <div className="pricing-table-sign-up">
-                                            <a href="#inicio" className="hover-btn-new"><span>Actualizar Ahora</span></a>
-                                            <hr></hr>
-                                            <a href="certificado.html" className="hover-btn-new"><span>Imprimir Certificado</span></a>
+                                            <a href="certificado.html" className="hover-btn-new"><span>Ver Certificado</span></a>
                                         </div>
                                     </div>
                                 </div>

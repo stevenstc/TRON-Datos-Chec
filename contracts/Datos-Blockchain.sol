@@ -5,15 +5,10 @@ import "./SafeMath.sol";
 contract DatosEnBlockchain  {
   using SafeMath for uint;
   
-  struct Tariff {
-    uint time;
-    uint percent;
-  }
-  
   struct Lectura {
     uint medida;
-    uint block;
-    uint timestampa;
+    string block; //primero guarda el bloque y despues el hash de la transacción
+    uint timestampa; // el tiempo en que se hace el registro
   }
   
   struct Cuenta {
@@ -48,20 +43,20 @@ contract DatosEnBlockchain  {
   event NuevaCuenta(uint cuenta,uint blocke,address autoridad);
 
   constructor(string _nombre) public {
-      owner = msg.sender;
-      autoridades[msg.sender].registered = true;
-      autoridades[msg.sender].blockeCreacion = block.number;
-      autoridades[msg.sender].nombre = _nombre;
+    owner = msg.sender;
+    autoridades[msg.sender].registered = true;
+    autoridades[msg.sender].blockeCreacion = block.number;
+    autoridades[msg.sender].nombre = _nombre;
 
   }
 
-  function setstate() public view returns(uint, uint, uint, address) {
+  function setstate() returns(uint, uint, uint, address) public view {
     
     return (cuentasActivas, certificados, kilowatt, owner);
     
   }
 
-  function registarCuenta(uint cuenta, uint contador, uint estrato) public returns(bool) {
+  function registarCuenta(uint cuenta, uint contador, uint estrato) returns(bool) public {
     
     require (autoridades[msg.sender].registered);
     require (!cuentas[cuenta].registered);
@@ -79,7 +74,7 @@ contract DatosEnBlockchain  {
     
   }
   
-  function registarConsumo(uint cuenta, uint medida) public returns(bool, uint) {
+  function registarConsumo(uint cuenta, uint medida) returns(bool, uint) public {
     
     require (autoridades[msg.sender].registered);
     require (cuentas[cuenta].registered);
@@ -98,7 +93,18 @@ contract DatosEnBlockchain  {
     
   }
 
-  function verConsumo (uint cuenta, uint x) public view returns(uint, uint, uint, uint) {
+  function registrarHash(string hash, uint cuenta) returns(bool res) external {
+    require (autoridades[msg.sender].registered);
+    require (cuentas[cuenta].registered);
+    
+    //uint lecturaN = cuentas[cuenta].x;
+    cuentas[cuenta].lecturas[cuentas[cuenta].x].block = hash;
+    return true;
+
+  }
+  
+
+  function verConsumo (uint cuenta, uint x) returns(uint, uint, uint, uint) public view {
     
     require(x < cuentas[cuenta].x);
     
