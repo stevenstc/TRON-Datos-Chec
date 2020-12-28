@@ -31,10 +31,10 @@ app.post('/api/datos/registarconsumo',async(req,res) => {
     let regconsu = await contract.registarConsumo(cuenta, medida).send();
 
     let direccion = await tronWeb.trx.getAccount();
-    //direccion = direccion.address;
-    //direccion = tronWeb.address.fromHex(ownerTronlink);
+    direccion = direccion.address;
+    direccion = tronWeb.address.fromHex(direccion);
     console.log("https://shasta.tronscan.org/#/transaction/"+regconsu)
-    res.send("[OK] = " + "se registro la medida: " + medida + " en la cuenta: " + cuenta);
+    res.send("[OK] = " + "se registro la medida: "+medida+" en la cuenta: "+cuenta+" | desde: "+direccion);
 });
 
 

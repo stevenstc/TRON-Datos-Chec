@@ -15,10 +15,7 @@ const openTronLink = () => {
     window.open(WEBSTORE_URL, '_blank');
 };
 
-const TronLinkGuide = props => {
-    const {
-        installed = false
-    } = props;
+const TronLinkGuide = props => {const {installed = false} = props;
 
     if(!installed) {
         return (

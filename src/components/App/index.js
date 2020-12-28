@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import TronWeb from "tronweb";
 import Utils from "../../utils";
 
-import Consulta from "../Consulta";
 import Datos from "../Datos";
 import Cuenta from "../Cuenta";
 import TronLinkGuide from "../TronLinkGuide";
@@ -90,7 +89,7 @@ class App extends Component {
         if (this.state.tronWeb.loggedIn) {
           return;
         }
-
+        
         this.setState({
           tronWeb: {
             installed: true,
@@ -112,9 +111,7 @@ class App extends Component {
       <div>
         <Datos />
         
-        <Consulta />
-        
-        <Cuenta /> 
+        <Cuenta consulta/> 
           
       </div>
       
