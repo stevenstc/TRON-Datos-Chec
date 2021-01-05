@@ -50,40 +50,66 @@ export default class DatosBlockchain extends Component {
 
   };
 
-  async componentWillMount() {
-    await this.cambiarDatos();
-    await this.irCertificado();
-
-  };
-
   async irCertificado() {
 
     const {cuenta } = this.state;
-    var direccion = "TB7RTxBPY4eMvKjceXj8SWjVnZCrWr4XvF";
-    var cargo = "Admin";
-    var consumo = 1270;
 
-    var meses = {
-      0:"Octubre"+"."+"177"+"."+"185378001",
-      1:"Septiembre"+"."+"79"+"."+"185378002",
-      2:"Agosto"+"."+"164"+"."+"185378003",
-      3:"Julio"+"."+"167"+"."+"185378004",
-      4:"Junio"+"."+"222"+"."+"185378005",
-      5:"Mayo"+"."+"209"+"."+"185378006",
-      6:"Abril"+"."+"201"+"."+"185378007",
-      7:"Marzo"+"."+"180"+"."+"185378008",
-      8:"Febrero"+"."+"234"+"."+"185378009",
-      9:"Enero"+"."+"184"+"."+"185378010",
-      10:"Diciembre"+"."+"269"+"."+"185378011",
-      11:"Noviembre"+"."+"149"+"."+"185378012"
+    //datos BC
+    var direccion = await window.tronWeb.trx.getAccount();
 
-    };
+    if (await window.tronWeb.trx.getAccount()) {
+      var direccion = window.tronWeb.address.fromHex(direccion.address);
+      direccion = "&direccion="+direccion;
+
+      if (true) {
+        var cargo = "Admin";
+        cargo = "&cargo="+cargo;
+      }else{
+        var cargo = "";
+      }
+
+      
+    }else{
+      var direccion = "";
+      var cargo = "";
+    }
+
+    if (true) {
+      var consumo = 1270;
+      consumo = "&consumo="+consumo;
+    }else{
+      var consumo = "";
+    }
+
+    if (true) {
+
+      var meses = {
+        0:"Octubre"+"."+"177"+"."+"185378001",
+        1:"Septiembre"+"."+"79"+"."+"185378002",
+        2:"Agosto"+"."+"164"+"."+"185378003",
+        3:"Julio"+"."+"167"+"."+"185378004",
+        4:"Junio"+"."+"222"+"."+"185378005",
+        5:"Mayo"+"."+"209"+"."+"185378006",
+        6:"Abril"+"."+"201"+"."+"185378007",
+        7:"Marzo"+"."+"180"+"."+"185378008",
+        8:"Febrero"+"."+"234"+"."+"185378009",
+        9:"Enero"+"."+"184"+"."+"185378010",
+        10:"Diciembre"+"."+"269"+"."+"185378011",
+        11:"Noviembre"+"."+"149"+"."+"185378012"
+
+      };
+
+    }else{
+
+    }
+
+    
 
     this.setState({
       Meses:  meses
     });
 
-    var cert = "certificado.html?cuenta="+cuenta+"&direccion="+direccion+"&cargo="+cargo+"&consumo="+consumo+"&mes1="+meses[0]+"&mes2="+meses[1]+"&mes3="+meses[2]+"&mes4="+meses[3]+"&mes5="+meses[4]+"&mes6="+meses[5]+"&mes7="+meses[6]+"&mes8="+meses[7]+"&mes9="+meses[8]+"&mes10="+meses[9]+"&mes11="+meses[10]+"&mes12="+meses[11];
+    var cert = "certificado.html?cuenta="+cuenta+direccion+cargo+consumo+"&mes1="+meses[0]+"&mes2="+meses[1]+"&mes3="+meses[2]+"&mes4="+meses[3]+"&mes5="+meses[4]+"&mes6="+meses[5]+"&mes7="+meses[6]+"&mes8="+meses[7]+"&mes9="+meses[8]+"&mes10="+meses[9]+"&mes11="+meses[10]+"&mes12="+meses[11];
     this.setState({
       certificado: cert
     });
@@ -139,28 +165,43 @@ export default class DatosBlockchain extends Component {
   async consulta() {
 
     let cuenta = document.getElementById("cuenta").value;
-    
 
-    this.setState({
-      consulta: true,
-      cuenta: cuenta
-    });
+    let activa = false;
+
+    activa = await Utils.contract.cuentaActiva(cuenta).call();
+    console.log(activa);
+    activa = activa.res;
+    
+    //comprobaciones 
+    if (cuenta >= 1 && activa) {
+      this.setState({
+        consulta: true,
+        cuenta: cuenta
+      });
+
+      await this.cambiarDatos();
+      await this.irCertificado();
+    }
+    
 
     //let x = 1;
     //let cosas = Utils.contract.verConsumo(cuenta, x).call();
   
     //console.log(cosas);
+
+
     
   };
 
   async nuevaConsulta() {
     this.setState({
-      consulta: false
+      consulta: false,
+      cuenta: 0
     });
   };
 
   render() {
-    const {data, options, certificado, consulta } = this.state;
+    const {data, options, certificado, consulta, cuenta } = this.state;
 
     if(consulta) {
       return (
@@ -195,8 +236,8 @@ export default class DatosBlockchain extends Component {
                                 <div className="col-md-8">
                                     <div className="pricing-table pricing-table-highlighted">
                                         <div className="pricing-table-header grd1">
-                                            <h2>Consumo Últimos 6 meses</h2>
-                                            <h2>Promedio 170</h2>
+                                            <h2>Cuenta N°: <b>{cuenta}</b></h2>
+                                            <h2>Promedio Últimos 6 meses: <b>170</b></h2>
                                         </div>
                                         <div className="pricing-table-space"></div>
                                         <div className="pricing-table-features">
