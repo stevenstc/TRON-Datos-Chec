@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.js": "/static/js/main.efee3286.chunk.js",
+    "main.js.map": "/static/js/main.efee3286.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.43893baf.js",
+    "runtime-main.js.map": "/static/js/runtime-main.43893baf.js.map",
+    "static/js/2.bb4fa025.chunk.js": "/static/js/2.bb4fa025.chunk.js",
+    "static/js/2.bb4fa025.chunk.js.map": "/static/js/2.bb4fa025.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.870574172f0f5d673977e3073fe3f53d.js": "/precache-manifest.870574172f0f5d673977e3073fe3f53d.js",
+    "service-worker.js": "/service-worker.js",
+    "static/js/2.bb4fa025.chunk.js.LICENSE.txt": "/static/js/2.bb4fa025.chunk.js.LICENSE.txt",
+    "static/media/TronLinkLogo.png": "/static/media/TronLinkLogo.d3a8f115.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.43893baf.js",
+    "static/js/2.bb4fa025.chunk.js",
+    "static/js/main.efee3286.chunk.js"
+  ]
+}
