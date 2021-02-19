@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/stevenstc"
   },
-  "homepage": "https://Datos-en-Blockchain.ml/",
+  "homepage": "https://stevenstc.github.io/TRON-Datos/",
   "dependencies": {
     "@babel/core": "7.8.4",
     "@reactchartjs/react-chart.js": "^1.0.0-rc.2",
