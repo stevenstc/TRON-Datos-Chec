@@ -58,27 +58,31 @@ export default class DatosBlockchain extends Component {
     var direccion = await window.tronWeb.trx.getAccount();
 
     if (await window.tronWeb.trx.getAccount()) {
-      var direccion = window.tronWeb.address.fromHex(direccion.address);
+      direccion = window.tronWeb.address.fromHex(direccion.address);
       direccion = "&direccion="+direccion;
 
+      var cargo ="";
+
       if (true) {
-        var cargo = "Admin";
+        cargo = "Admin";
         cargo = "&cargo="+cargo;
       }else{
-        var cargo = "";
+        cargo = "";
       }
 
       
     }else{
-      var direccion = "";
-      var cargo = "";
+      direccion = "";
+      cargo = "";
     }
 
+    var consumo = "";
+
     if (true) {
-      var consumo = 1270;
+      consumo = 1270;
       consumo = "&consumo="+consumo;
     }else{
-      var consumo = "";
+      consumo = "";
     }
 
     if (true) {
