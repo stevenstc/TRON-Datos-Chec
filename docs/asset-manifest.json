@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/TRON-Datos/static/js/main.efee3286.chunk.js",
-    "main.js.map": "/TRON-Datos/static/js/main.efee3286.chunk.js.map",
+    "main.js": "/TRON-Datos/static/js/main.5c80a281.chunk.js",
+    "main.js.map": "/TRON-Datos/static/js/main.5c80a281.chunk.js.map",
     "runtime-main.js": "/TRON-Datos/static/js/runtime-main.edfd6862.js",
     "runtime-main.js.map": "/TRON-Datos/static/js/runtime-main.edfd6862.js.map",
     "static/js/2.b1523095.chunk.js": "/TRON-Datos/static/js/2.b1523095.chunk.js",
     "static/js/2.b1523095.chunk.js.map": "/TRON-Datos/static/js/2.b1523095.chunk.js.map",
     "index.html": "/TRON-Datos/index.html",
-    "precache-manifest.7649a74d94d4a8444cfbee37cf6ee2c8.js": "/TRON-Datos/precache-manifest.7649a74d94d4a8444cfbee37cf6ee2c8.js",
+    "precache-manifest.35c4ea5c7574ad74fddda3f97e3b7fd2.js": "/TRON-Datos/precache-manifest.35c4ea5c7574ad74fddda3f97e3b7fd2.js",
     "service-worker.js": "/TRON-Datos/service-worker.js",
     "static/js/2.b1523095.chunk.js.LICENSE.txt": "/TRON-Datos/static/js/2.b1523095.chunk.js.LICENSE.txt",
     "static/media/TronLinkLogo.png": "/TRON-Datos/static/media/TronLinkLogo.d3a8f115.png"
@@ -15,6 +15,6 @@
   "entrypoints": [
     "static/js/runtime-main.edfd6862.js",
     "static/js/2.b1523095.chunk.js",
-    "static/js/main.efee3286.chunk.js"
+    "static/js/main.5c80a281.chunk.js"
   ]
 }
