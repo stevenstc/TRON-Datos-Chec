@@ -1,0 +1,32 @@
+[
+  {
+    "cuenta": 123,
+    "medida": 123456,
+    "tiempoMedida": 1615985561
+  },
+  {
+    "cuenta": 1234,
+    "medida": 123456,
+    "tiempoMedida": 1615985561
+  },
+  {
+    "cuenta": 1235,
+    "medida": 123456,
+    "tiempoMedida": 1615985561
+  },
+  {
+    "cuenta": 1236,
+    "medida": 123456,
+    "tiempoMedida": 1615985561
+  },
+  {
+    "cuenta": 1237,
+    "medida": 123456,
+    "tiempoMedida": 1615985561
+  },
+  {
+    "cuenta": 1238,
+    "medida": 123456,
+    "tiempoMedida": 1615985561
+  }
+]

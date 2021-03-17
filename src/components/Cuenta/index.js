@@ -168,9 +168,9 @@ export default class DatosBlockchain extends Component {
 
   async consulta() {
 
-    let cuenta = document.getElementById("cuenta").value;
+    var cuenta = document.getElementById("cuenta").value;
 
-    let activa = false;
+    var activa = false;
 
     activa = await Utils.contract.cuentaActiva(cuenta).call();
     console.log(activa);

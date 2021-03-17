@@ -111,7 +111,7 @@ class App extends Component {
       <div>
         <Datos />
         
-        <Cuenta consulta/> 
+        <Cuenta /> 
           
       </div>
       

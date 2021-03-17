@@ -2,6 +2,9 @@ const express = require('express');
 const bodyParser = require("body-parser");
 const TronWeb = require('tronweb');
 
+const datos = require('./datos_prueba.json');
+
+console.log(datos);
 
 const app = express();
 const port = process.env.PORT || 3003;
@@ -23,8 +26,11 @@ tronWeb = new TronWeb(
 
 app.post('/api/registar/consumo',async(req,res) => {
 
-    let cuenta = req.body.cuenta;
-    let medida = req.body.medida;
+    let datos = req.body;
+
+		for (var i = 0; i < datos.length; i++) {
+			datos[i]
+		}
 
     let contract = await tronWeb.contract().at("TYGjdahV9MAcvdJWAFPhoyJBZW63JQCJYn");//direccion del contrato
 

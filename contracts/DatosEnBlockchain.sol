@@ -1,17 +1,19 @@
-pragma solidity ^0.5.14;
+pragma solidity ^0.6.0;
 
 import "./SafeMath.sol";
 
 contract DatosEnBlockchain  {
   using SafeMath for uint;
-  
+
   struct Lectura {
     uint medida;
-    uint block; //primero guarda el bloque 
-    string hash;
-    uint timestampa; // el tiempo en que se hace el registro
+    uint tiempoMedida;
+    uint tiempoRegistro;
+    string hashOriginal;
+    string hashDeCambio;
+    string comentario;
   }
-  
+
   struct Cuenta {
     bool registered;
     uint contador;
@@ -48,25 +50,44 @@ contract DatosEnBlockchain  {
 
   }
 
+  function registarConsumo(uint _cuenta, uint _medida, uint _tiempoMedida) public returns(bool, uint) {
+
+    require (autoridades[msg.sender].registered);
+    require (cuentas[_cuenta].registered);
+
+    uint medidaA = cuentas[_cuenta].ultimaLectura;
+    cuentas[_cuenta].ultimaLectura = _medida;
+    cuentas[_cuenta].lecturas.push(Lectura(_medida, _tiempoMedida, block.timestamp, "", "", ""));
+
+
+    medidaA = _medida - medidaA;
+
+    kilowatt = kilowatt + medidaA;
+
+    emit Consumo(_medida, block.number, block.timestamp);
+    return (true, kilowatt);
+
+  }
+
   function setstate() public view returns(uint, uint, uint, address) {
-    
+
     return (cuentasActivas, certificados, kilowatt, owner);
-    
+
   }
 
   function cuentaActiva(uint cuenta) public view returns(bool res, uint nLecturas){
 
     require (cuentas[cuenta].registered);
-    
+
     return (true, cuentas[cuenta].lecturas.length);
   }
-  
+
 
   function registarCuenta(uint cuenta, uint contador) public returns(bool) {
-    
+
     require (autoridades[msg.sender].registered);
     require (!cuentas[cuenta].registered);
-    
+
     cuentas[cuenta].registered = true;
     cuentas[cuenta].blockeCreacion = block.number;
     cuentas[cuenta].autoridad = msg.sender;
@@ -74,59 +95,60 @@ contract DatosEnBlockchain  {
 
     cuentasActivas++;
 
-    emit NuevaCuenta(cuenta, block.number, msg.sender);
     return true;
-    
-  }
-  
-  function registarConsumo(uint cuenta, uint medida) public returns(bool, uint) {
-    
-    require (autoridades[msg.sender].registered);
-    require (cuentas[cuenta].registered);
-    
-    uint medidaA = cuentas[cuenta].ultimaLectura;
-    cuentas[cuenta].ultimaLectura = medida;
-    cuentas[cuenta].lecturas.push(Lectura(medida, block.number,"000" , block.timestamp));
 
-
-    medidaA = medida - medidaA;
-
-    kilowatt = kilowatt + medidaA;
-
-    emit Consumo(medida, block.number, block.timestamp);
-    return (true, kilowatt);
-    
   }
 
-  function registrarHash(string memory _hash, uint cuenta) public returns(bool res) {
+
+  function registrarHashOriginal(string memory _hash, uint cuenta) public returns(bool res) {
     require (autoridades[msg.sender].registered);
     require (cuentas[cuenta].registered);
-    
+
     uint lecturaN = cuentas[cuenta].lecturas.length;
-    cuentas[cuenta].lecturas[lecturaN-1].hash = _hash;
+    cuentas[cuenta].lecturas[lecturaN-1].hashOriginal = _hash;
     return true;
 
   }
-  
 
-  function verConsumo (uint cuenta, uint x) public view returns(uint, uint, uint, uint, string memory) {
-    
+  function registrarHashCambioMedida(string memory _hash, uint _cuenta) public returns(bool res) {
+    require (autoridades[msg.sender].registered);
+    require (cuentas[_cuenta].registered);
+
+    uint lecturaN = cuentas[_cuenta].lecturas.length;
+    cuentas[_cuenta].lecturas[lecturaN-1].hashDeCambio = _hash;
+    return true;
+
+  }
+
+  function registrarCambioMedida(uint _cuenta, uint _medida) public returns(bool res) {
+    require (autoridades[msg.sender].registered);
+    require (cuentas[_cuenta].registered);
+
+    uint lecturaN = cuentas[_cuenta].lecturas.length;
+    cuentas[_cuenta].lecturas[lecturaN-1].medida = _medida;
+    return true;
+
+  }
+
+
+  function verConsumo (uint cuenta, uint x) public view returns(uint, uint, uint, uint) {
+
     require(x <= cuentas[cuenta].lecturas.length);
     require(x > 0);
-    
+
     x = x-1;
     uint nlecturas = cuentas[cuenta].lecturas.length;
     uint medida =  cuentas[cuenta].lecturas[x].medida;
-    uint blocky =  cuentas[cuenta].lecturas[x].block;
-    uint timestampa =  cuentas[cuenta].lecturas[x].timestampa;
-    string memory hash = cuentas[cuenta].lecturas[x].hash;
-    
-    return (nlecturas, medida, blocky, timestampa, hash);
-    
+    uint blocky =  cuentas[cuenta].lecturas[x].tiempoMedida;
+    uint timestampa =  cuentas[cuenta].lecturas[x].tiempoRegistro;
+
+
+    return (nlecturas, medida, blocky, timestampa);
+
   }
 
   function registarAdmin(address direccion, string memory nombre) public returns(bool, address, string memory) {
-    
+
     require (msg.sender == owner);
 
     autoridades[direccion].registered = true;
@@ -134,13 +156,13 @@ contract DatosEnBlockchain  {
     autoridades[direccion].nombre = nombre;
 
     emit NuevoAdmin(direccion, block.number, block.timestamp);
-    
+
     return (true, direccion, nombre);
-    
+
   }
 
   function quitarAdmin(address direccion) public returns(bool, address, uint) {
-    
+
     require (msg.sender == owner);
 
     autoridades[direccion].registered = false;
@@ -149,7 +171,7 @@ contract DatosEnBlockchain  {
     emit AdminRemovido(direccion, block.number, block.timestamp);
 
     return (true, direccion, block.number);
-    
+
   }
 
 }
