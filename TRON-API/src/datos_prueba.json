@@ -1,9 +1,250 @@
 [
   {
-    "cuenta": 123,
-    "medida": 123456,
-    "tiempoMedida": 1615985561
-  },
+    "IsOk": "1",
+    "Message": "",
+    "Data": [
+        {
+            "Ano": "2020",
+            "Mes": "05",
+            "ClienteId": 107558968.0,
+            "DescripcionConcepto": "CONSUMO ACTIVA",
+            "CantidadKWH": 124.0,
+            "Valor": 74764.0,
+            "ValorTarifa": 602.9363,
+            "ValorCu": 602.9363
+        },
+        {
+            "Ano": "2020",
+            "Mes": "10",
+            "ClienteId": 107558968.0,
+            "DescripcionConcepto": "CONSUMO ACTIVA",
+            "CantidadKWH": 115.0,
+            "Valor": 69338.0,
+            "ValorTarifa": 602.9363,
+            "ValorCu": 602.9363
+        },
+        {
+            "Ano": "2020",
+            "Mes": "11",
+            "ClienteId": 107558968.0,
+            "DescripcionConcepto": "CONSUMO ACTIVA",
+            "CantidadKWH": 109.0,
+            "Valor": 65720.0,
+            "ValorTarifa": 602.9363,
+            "ValorCu": 602.9363
+        },
+        {
+            "Ano": "2021",
+            "Mes": "01",
+            "ClienteId": 107558968.0,
+            "DescripcionConcepto": "CONSUMO ACTIVA",
+            "CantidadKWH": 114.0,
+            "Valor": 69078.0,
+            "ValorTarifa": 605.9510,
+            "ValorCu": 605.951
+        },
+        {
+            "Ano": "2021",
+            "Mes": "02",
+            "ClienteId": 107558968.0,
+            "DescripcionConcepto": "CONSUMO ACTIVA",
+            "CantidadKWH": 117.0,
+            "Valor": 71251.0,
+            "ValorTarifa": 608.9808,
+            "ValorCu": 608.9808
+        },
+        {
+            "Ano": "2021",
+            "Mes": "03",
+            "ClienteId": 107558968.0,
+            "DescripcionConcepto": "CONSUMO ACTIVA",
+            "CantidadKWH": 114.0,
+            "Valor": 69840.0,
+            "ValorTarifa": 612.6347,
+            "ValorCu": 612.6347
+        },
+        {
+            "Ano": "2020",
+            "Mes": "09",
+            "ClienteId": 107558968.0,
+            "DescripcionConcepto": "CONSUMO ACTIVA",
+            "CantidadKWH": 120.0,
+            "Valor": 72352.0,
+            "ValorTarifa": 602.9363,
+            "ValorCu": 602.9363
+        },
+        {
+            "Ano": "2020",
+            "Mes": "12",
+            "ClienteId": 107558968.0,
+            "DescripcionConcepto": "CONSUMO ACTIVA",
+            "CantidadKWH": 123.0,
+            "Valor": 74161.0,
+            "ValorTarifa": 602.9363,
+            "ValorCu": 602.9363
+        },
+        {
+            "Ano": "2019",
+            "Mes": "04",
+            "ClienteId": 107558968.0,
+            "DescripcionConcepto": "CONSUMO ACTIVA",
+            "CantidadKWH": 100.0,
+            "Valor": 55927.0,
+            "ValorTarifa": 559.2727,
+            "ValorCu": 559.2727
+        },
+        {
+            "Ano": "2019",
+            "Mes": "05",
+            "ClienteId": 107558968.0,
+            "DescripcionConcepto": "CONSUMO ACTIVA",
+            "CantidadKWH": 111.0,
+            "Valor": 61678.0,
+            "ValorTarifa": 555.6548,
+            "ValorCu": 555.6548
+        },
+        {
+            "Ano": "2019",
+            "Mes": "06",
+            "ClienteId": 107558968.0,
+            "DescripcionConcepto": "CONSUMO ACTIVA",
+            "CantidadKWH": 110.0,
+            "Valor": 59776.0,
+            "ValorTarifa": 543.4152,
+            "ValorCu": 543.4152
+        },
+        {
+            "Ano": "2019",
+            "Mes": "07",
+            "ClienteId": 107558968.0,
+            "DescripcionConcepto": "CONSUMO ACTIVA",
+            "CantidadKWH": 112.0,
+            "Valor": 61506.0,
+            "ValorTarifa": 549.1586,
+            "ValorCu": 549.1586
+        },
+        {
+            "Ano": "2019",
+            "Mes": "08",
+            "ClienteId": 107558968.0,
+            "DescripcionConcepto": "CONSUMO ACTIVA",
+            "CantidadKWH": 109.0,
+            "Valor": 60555.0,
+            "ValorTarifa": 555.5529,
+            "ValorCu": 555.5529
+        },
+        {
+            "Ano": "2019",
+            "Mes": "09",
+            "ClienteId": 107558968.0,
+            "DescripcionConcepto": "CONSUMO ACTIVA",
+            "CantidadKWH": 111.0,
+            "Valor": 62747.0,
+            "ValorTarifa": 565.2854,
+            "ValorCu": 565.2854
+        },
+        {
+            "Ano": "2019",
+            "Mes": "10",
+            "ClienteId": 107558968.0,
+            "DescripcionConcepto": "CONSUMO ACTIVA",
+            "CantidadKWH": 97.0,
+            "Valor": 54399.0,
+            "ValorTarifa": 560.8094,
+            "ValorCu": 560.8094
+        },
+        {
+            "Ano": "2019",
+            "Mes": "11",
+            "ClienteId": 107558968.0,
+            "DescripcionConcepto": "CONSUMO ACTIVA",
+            "CantidadKWH": 114.0,
+            "Valor": 64234.0,
+            "ValorTarifa": 563.4595,
+            "ValorCu": 563.4595
+        },
+        {
+            "Ano": "2019",
+            "Mes": "12",
+            "ClienteId": 107558968.0,
+            "DescripcionConcepto": "CONSUMO ACTIVA",
+            "CantidadKWH": 102.0,
+            "Valor": 57776.0,
+            "ValorTarifa": 566.4319,
+            "ValorCu": 566.4319
+        },
+        {
+            "Ano": "2020",
+            "Mes": "01",
+            "ClienteId": 107558968.0,
+            "DescripcionConcepto": "CONSUMO ACTIVA",
+            "CantidadKWH": 109.0,
+            "Valor": 60556.0,
+            "ValorTarifa": 555.5577,
+            "ValorCu": 555.5577
+        },
+        {
+            "Ano": "2020",
+            "Mes": "02",
+            "ClienteId": 107558968.0,
+            "DescripcionConcepto": "CONSUMO ACTIVA",
+            "CantidadKWH": 100.0,
+            "Valor": 54557.0,
+            "ValorTarifa": 545.5706,
+            "ValorCu": 545.5706
+        },
+        {
+            "Ano": "2020",
+            "Mes": "03",
+            "ClienteId": 107558968.0,
+            "DescripcionConcepto": "CONSUMO ACTIVA",
+            "CantidadKWH": 103.0,
+            "Valor": 62102.0,
+            "ValorTarifa": 602.9363,
+            "ValorCu": 602.9363
+        },
+        {
+            "Ano": "2020",
+            "Mes": "04",
+            "ClienteId": 107558968.0,
+            "DescripcionConcepto": "CONSUMO ACTIVA",
+            "CantidadKWH": 132.0,
+            "Valor": 79588.0,
+            "ValorTarifa": 602.9363,
+            "ValorCu": 602.9363
+        },
+        {
+            "Ano": "2020",
+            "Mes": "06",
+            "ClienteId": 107558968.0,
+            "DescripcionConcepto": "CONSUMO ACTIVA",
+            "CantidadKWH": 131.0,
+            "Valor": 78985.0,
+            "ValorTarifa": 602.9363,
+            "ValorCu": 602.9363
+        },
+        {
+            "Ano": "2020",
+            "Mes": "07",
+            "ClienteId": 107558968.0,
+            "DescripcionConcepto": "CONSUMO ACTIVA",
+            "CantidadKWH": 120.0,
+            "Valor": 72352.0,
+            "ValorTarifa": 602.9363,
+            "ValorCu": 602.9363
+        },
+        {
+            "Ano": "2020",
+            "Mes": "08",
+            "ClienteId": 107558968.0,
+            "DescripcionConcepto": "CONSUMO ACTIVA",
+            "CantidadKWH": 128.0,
+            "Valor": 77176.0,
+            "ValorTarifa": 602.9363,
+            "ValorCu": 602.9363
+        }
+    ]
+},
   {
     "cuenta": 1234,
     "medida": 123456,
