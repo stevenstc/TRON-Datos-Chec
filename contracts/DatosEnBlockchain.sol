@@ -1,4 +1,4 @@
-pragma solidity ^0.6.0;
+pragma solidity ^0.5.15;
 
 import "./SafeMath.sol";
 
@@ -7,7 +7,6 @@ contract DatosEnBlockchain  {
 
   struct Lectura {
     uint medida;
-    uint tiempoMedida;
     uint tiempoRegistro;
     string hashOriginal;
     string hashDeCambio;
@@ -16,7 +15,6 @@ contract DatosEnBlockchain  {
 
   struct Cuenta {
     bool registered;
-    uint contador;
     uint blockeCreacion;
     address autoridad;
     uint ultimaLectura;
@@ -37,11 +35,6 @@ contract DatosEnBlockchain  {
   mapping (uint => Cuenta) public cuentas;
   mapping (address => Autoridad) public autoridades;
 
-  event Consumo(uint medida, uint blocke, uint tiempo);
-  event NuevoAdmin(address medida, uint blocke, uint tiempo);
-  event AdminRemovido(address medida, uint blocke, uint tiempo);
-  event NuevaCuenta(uint cuenta,uint blocke,address autoridad);
-
   constructor(string memory _nombre) public {
     owner = msg.sender;
     autoridades[msg.sender].registered = true;
@@ -50,22 +43,19 @@ contract DatosEnBlockchain  {
 
   }
 
-  function registarConsumo(uint _cuenta, uint _medida, uint _tiempoMedida) public returns(bool, uint) {
+  function registarConsumo(uint _cuenta, uint _kWH) public returns(bool) {
 
-    require (autoridades[msg.sender].registered);
-    require (cuentas[_cuenta].registered);
+    Cuenta storage cuenta = cuentas[_cuenta];
+    Autoridad storage autoridad = autoridades[msg.sender];
 
-    uint medidaA = cuentas[_cuenta].ultimaLectura;
-    cuentas[_cuenta].ultimaLectura = _medida;
-    cuentas[_cuenta].lecturas.push(Lectura(_medida, _tiempoMedida, block.timestamp, "", "", ""));
+    require (autoridad.registered);
+    require (cuenta.registered);
 
+    cuenta.ultimaLectura = _kWH;
+    cuenta.lecturas.push(Lectura(_kWH, block.timestamp, "", "", ""));
 
-    medidaA = _medida - medidaA;
-
-    kilowatt = kilowatt + medidaA;
-
-    emit Consumo(_medida, block.number, block.timestamp);
-    return (true, kilowatt);
+    kilowatt += _kWH;
+    return (true);
 
   }
 
@@ -83,15 +73,17 @@ contract DatosEnBlockchain  {
   }
 
 
-  function registarCuenta(uint cuenta, uint contador) public returns(bool) {
+  function registarCuenta(uint _cuenta) public returns(bool) {
 
-    require (autoridades[msg.sender].registered);
-    require (!cuentas[cuenta].registered);
+    Cuenta storage cuenta = cuentas[_cuenta];
+    Autoridad storage autoridad = autoridades[msg.sender];
 
-    cuentas[cuenta].registered = true;
-    cuentas[cuenta].blockeCreacion = block.number;
-    cuentas[cuenta].autoridad = msg.sender;
-    cuentas[cuenta].contador = contador;
+    require (autoridad.registered);
+    require (!cuenta.registered);
+
+    cuenta.registered = true;
+    cuenta.blockeCreacion = block.number;
+    cuenta.autoridad = msg.sender;
 
     cuentasActivas++;
 
@@ -100,38 +92,44 @@ contract DatosEnBlockchain  {
   }
 
 
-  function registrarHashOriginal(string memory _hash, uint cuenta) public returns(bool res) {
-    require (autoridades[msg.sender].registered);
-    require (cuentas[cuenta].registered);
+  function registrarHashOriginal(string memory _hash, uint _cuenta) public returns(bool) {
+    Cuenta storage cuenta = cuentas[_cuenta];
+    Autoridad storage autoridad = autoridades[msg.sender];
 
-    uint lecturaN = cuentas[cuenta].lecturas.length;
-    cuentas[cuenta].lecturas[lecturaN-1].hashOriginal = _hash;
+    require (autoridad.registered);
+    require (cuenta.registered);
+
+    cuenta.lecturas[cuenta.lecturas.length-1].hashOriginal = _hash;
     return true;
 
   }
 
   function registrarHashCambioMedida(string memory _hash, uint _cuenta) public returns(bool res) {
-    require (autoridades[msg.sender].registered);
-    require (cuentas[_cuenta].registered);
+    Cuenta storage cuenta = cuentas[_cuenta];
+    Autoridad storage autoridad = autoridades[msg.sender];
 
-    uint lecturaN = cuentas[_cuenta].lecturas.length;
-    cuentas[_cuenta].lecturas[lecturaN-1].hashDeCambio = _hash;
+    require (autoridad.registered);
+    require (cuenta.registered);
+
+    cuenta.lecturas[cuenta.lecturas.length-1].hashDeCambio = _hash;
     return true;
 
   }
 
   function registrarCambioMedida(uint _cuenta, uint _medida) public returns(bool res) {
-    require (autoridades[msg.sender].registered);
-    require (cuentas[_cuenta].registered);
+    Cuenta storage cuenta = cuentas[_cuenta];
+    Autoridad storage autoridad = autoridades[msg.sender];
 
-    uint lecturaN = cuentas[_cuenta].lecturas.length;
-    cuentas[_cuenta].lecturas[lecturaN-1].medida = _medida;
+    require (autoridad.registered);
+    require (cuenta.registered);
+
+    cuenta.lecturas[cuenta.lecturas.length-1].medida = _medida;
     return true;
 
   }
 
 
-  function verConsumo (uint cuenta, uint x) public view returns(uint, uint, uint, uint) {
+  function verConsumo (uint cuenta, uint x) public view returns(uint, uint, uint) {
 
     require(x <= cuentas[cuenta].lecturas.length);
     require(x > 0);
@@ -139,11 +137,10 @@ contract DatosEnBlockchain  {
     x = x-1;
     uint nlecturas = cuentas[cuenta].lecturas.length;
     uint medida =  cuentas[cuenta].lecturas[x].medida;
-    uint blocky =  cuentas[cuenta].lecturas[x].tiempoMedida;
     uint timestampa =  cuentas[cuenta].lecturas[x].tiempoRegistro;
 
 
-    return (nlecturas, medida, blocky, timestampa);
+    return (nlecturas, medida, timestampa);
 
   }
 
@@ -155,8 +152,6 @@ contract DatosEnBlockchain  {
     autoridades[direccion].blockeCreacion = block.number;
     autoridades[direccion].nombre = nombre;
 
-    emit NuevoAdmin(direccion, block.number, block.timestamp);
-
     return (true, direccion, nombre);
 
   }
@@ -167,8 +162,6 @@ contract DatosEnBlockchain  {
 
     autoridades[direccion].registered = false;
     autoridades[direccion].blockeCreacion = block.number;
-
-    emit AdminRemovido(direccion, block.number, block.timestamp);
 
     return (true, direccion, block.number);
 

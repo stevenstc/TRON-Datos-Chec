@@ -5,9 +5,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js && npx rimraf docs && npx move-cli build docs",
-    "test": "node scripts/test.js",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages - build"
+    "dev": "node scripts/build.js && npx rimraf dev && npx move-cli dev FrondEnd"
   },
   "repository": {
     "type": "git",

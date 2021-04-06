@@ -1,7 +1,7 @@
 {
-  "name": "apitron",
+  "name": "mongoose-api",
   "version": "1.0.0",
-  "description": "es una api para interactuar con la blockchain",
+  "description": "es una api para interactuar con mongose",
   "main": "index.js",
   "scripts": {
     "start": "node src",
@@ -12,6 +12,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "mongoose": "^5.11.18",
     "mysql": "^2.18.1",
     "request": "^2.88.2",
     "tronweb": "^3.1.0"
