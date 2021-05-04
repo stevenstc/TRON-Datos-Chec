@@ -8,9 +8,9 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
 //console.log(datos);
 
 const app = express();
-const port = process.env.PORT || 3003;
-const prykey = process.env.APP_PRYKEY || "b5268f1b0cdaf5da97425ea28ab1204225dba4c24c86e45fb8a617b4699aec19";
-const red = process.env.APP_RED || "shasta.";
+const port = process.env.PORT;
+const prykey = process.env.APP_PRYKEY;
+const red = process.env.APP_RED;
 const SC = process.env.APP_CONTRACT || "TYULMzkrw9mfGVVPJdxbP9K7og3Na5ajPv";
 
 
@@ -32,16 +32,12 @@ tronWeb = new TronWeb(
 app.get('/api/ver/consumo',async(req,res) => {
 
     let cuenta = req.body.cuenta;
-		let lectura = req.body.lectura;
+		let numero = req.body.numero;
 
     let contract = await tronWeb.contract().at(SC);//direccion del contrato
 
-    let regconsu = await contract.registarConsumo(cuenta, lectura).send();
-    await contract.registrarHash(regconsu, cuenta);
+    let varconsu = await contract.verConsumo(cuenta, numero).call();
 
-    let direccion = await tronWeb.trx.getAccount();
-    direccion = direccion.address;
-    direccion = tronWeb.address.fromHex(direccion);
 		var response = {
 			"IsOk": "1",
 	    "Message": "",
