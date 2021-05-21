@@ -129,7 +129,7 @@ contract DatosEnBlockchain  {
   }
 
 
-  function verConsumo (uint cuenta, uint x) public view returns(uint, uint, uint) {
+  function verConsumo (uint cuenta, uint x) public view returns(uint, uint, uint, string memory) {
 
     require(x <= cuentas[cuenta].lecturas.length);
     require(x > 0);
@@ -138,9 +138,10 @@ contract DatosEnBlockchain  {
     uint nlecturas = cuentas[cuenta].lecturas.length;
     uint medida =  cuentas[cuenta].lecturas[x].medida;
     uint timestampa =  cuentas[cuenta].lecturas[x].tiempoRegistro;
+    string memory hashO =  cuentas[cuenta].lecturas[x].hashOriginal;
 
 
-    return (nlecturas, medida, timestampa);
+    return (nlecturas, medida, timestampa,hashO);
 
   }
 
